@@ -1,14 +1,32 @@
-import termios
-import tty
-import sys
-import random
-import shutil
-import faker
-from colorama import Fore, Back, init
+'''
+Terminal Typing Test
+I made this because I like to spend time on Monkeytype @ https://monkeytype.com and sometimes I am either
+without internet or my CPU is taking a beating, causing a lag in the typing test. I wanted to make a lightweight
+typing test that ran in the terminal, so I gave it a shot. I found the get_input function on a medium blog
+post (I can't find it anymore!), everything else if of my own design. 
 
+Currently working on:
+ - Generating typed chars overtop of the string of random words.
+
+'''
+
+VERSION = '0.1'
+
+### IMPORTS ###
+
+try:
+  import termios
+  import tty
+  import sys
+  import random
+  import shutil
+  import faker
+  from colorama import Fore, Back, init
+except ImportError as e:
+  print(f'Failed to import module: {e}')
+
+# Initialize Faker
 fake = faker.Faker()
-
-columns = shutil.get_terminal_size().columns
 
 init(autoreset=True) # init from colorama to handle clean background colors for incorrectly typed chars
 
