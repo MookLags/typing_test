@@ -7,7 +7,8 @@ post (I can't find it anymore!), everything else if of my own design.
 
 Currently working on:
  - Generating typed chars overtop of the string of random words.
-
+ - Adding stats for typing test (time take, wpm)
+  - Bonus: Add these stats to a sqlite database and have an option to view
 '''
 
 VERSION = '0.1'
@@ -19,7 +20,6 @@ try:
   import tty
   import sys
   import random
-  import shutil
   import faker
   from colorama import Fore, Back, init
 except ImportError as e:
@@ -86,6 +86,7 @@ def main_game_loop():
           print(Back.RED + char_input, end='', flush=True) # Red if incorrect
         key_strokes += 1
     print('\n\ngood job!') # Placeholder until I get stats for typing test
+
     play_again = input('Go again? Press any key to keep typing, or [n] to stop\n')
     if play_again == 'n':
       terminate()
