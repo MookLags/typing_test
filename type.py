@@ -28,9 +28,13 @@ key_strokes = 0
 print(random_sentence)
 while key_strokes != sentence_length:
   char_input = get_input()
-  if char_input == random_sentence[key_strokes]:
-    print(Back.GREEN + char_input, end='', flush=True)
+  if char_input == '\x7f':
+    print('\b \b', end='', flush=True)
+    key_strokes -= 1
   else:
-    print(Back.RED + char_input, end='', flush=True)
-  key_strokes += 1
+    if char_input == random_sentence[key_strokes]:
+      print(Back.GREEN + char_input, end='', flush=True)
+    else:
+      print(Back.RED + char_input, end='', flush=True)
+    key_strokes += 1
 print('\n\ngood job!')
