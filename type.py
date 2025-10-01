@@ -39,16 +39,17 @@ def get_input() -> str:
   '''
   filedescriptors = termios.tcgetattr(sys.stdin)
   tty.setcbreak(sys.stdin)
-  key = sys.stdin.read(1)[0]
+  key = sys.stdin.read(1)
   termios.tcsetattr(sys.stdin, termios.TCSADRAIN, filedescriptors)
 
   return key
 
 def generate_words():
-  words = [fake.word() for _ in range(50)]
-  random_sentence = ' '.join([random.choice(words) for i in range(50)])
-  return random_sentence
+  words = [fake.word() for _ in range(100)]
+  words = ' '.join([random.choice(words) for i in range(50)])
+  return words
 
+random_sentence = generate_words()
 sentence_length = len(random_sentence)
 key_strokes = 0
 print(random_sentence)
