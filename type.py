@@ -32,10 +32,15 @@ fake = faker.Faker()
 init(autoreset=True) 
 
 ### Functions ###
+def terminate():
+  print('Exiting game...')
+  sys.exit()
+
 def get_input() -> str:
   '''
   Function: get_input
   Returns: Value of typed key
+  Uses: Used in main_game_loop to get typed char and compare with expected char
   '''
   filedescriptors = termios.tcgetattr(sys.stdin)
   tty.setcbreak(sys.stdin)
@@ -45,27 +50,45 @@ def get_input() -> str:
   return key
 
 def generate_words():
+  '''
+  Function: generate_words
+  Returns: str of words randomly generated with Faker module
+  Uses: Used in main_game_loop to create the taget words to type
+  '''
   words = [fake.word() for _ in range(100)]
-  words = ' '.join([random.choice(words) for i in range(50)])
+  words = ' '.join([random.choice(words) for i in range(5)])
   return words
 
 def main_game_loop():
-  pass
+  '''
+  Function: main_game_loop
+  Returns: void
+  Uses: __main__ Begins game
+  '''
+  running = True
+  while running:
 
-random_sentence = generate_words()
-sentence_length = len(random_sentence)
-key_strokes = 0
-print(random_sentence)
-while key_strokes != sentence_length:
-  char_input = get_input()
+    random_sentence = generate_words()
+    sentence_length = len(random_sentence)
+    key_strokes = 0
+    print(random_sentence)
 
-  if char_input == '\x7f': # Checks if key pressed is backspace
-    print('\b \b', end='', flush=True) # and handles accordingly
-    key_strokes -= 1
-  else: # Checking for any letter character
-    if char_input == random_sentence[key_strokes]:
-      print(Back.GREEN + char_input, end='', flush=True) # Green if correct
-    else:
-      print(Back.RED + char_input, end='', flush=True) # Red if incorrect
-    key_strokes += 1
-print('\n\ngood job!') # Placeholder until I get stats for typing test
+    while key_strokes != sentence_length:
+      char_input = get_input()
+
+      if char_input == '\x7f': # Checks if key pressed is backspace
+        print('\b \b', end='', flush=True) # and handles accordingly
+        key_strokes -= 1
+      else: # Checking for any letter character
+        if char_input == random_sentence[key_strokes]:
+          print(Back.GREEN + char_input, end='', flush=True) # Green if correct
+        else:
+          print(Back.RED + char_input, end='', flush=True) # Red if incorrect
+        key_strokes += 1
+    print('\n\ngood job!') # Placeholder until I get stats for typing test
+    play_again = input('Go again? Press any key to keep typing, or [n] to stop\n')
+    if play_again == 'n':
+      terminate()
+
+if __name__ == '__main__':
+  main_game_loop()
