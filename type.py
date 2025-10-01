@@ -28,9 +28,15 @@ except ImportError as e:
 # Initialize Faker
 fake = faker.Faker()
 
-init(autoreset=True) # init from colorama to handle clean background colors for incorrectly typed chars
+# Init colorama to handle clean background colors for incorrectly typed chars
+init(autoreset=True) 
 
+### Functions ###
 def get_input() -> str:
+  '''
+  Function: get_input
+  Returns: Value of typed key
+  '''
   filedescriptors = termios.tcgetattr(sys.stdin)
   tty.setcbreak(sys.stdin)
   key = sys.stdin.read(1)[0]
