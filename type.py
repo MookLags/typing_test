@@ -49,6 +49,9 @@ def generate_words():
   words = ' '.join([random.choice(words) for i in range(50)])
   return words
 
+def main_game_loop():
+  pass
+
 random_sentence = generate_words()
 sentence_length = len(random_sentence)
 key_strokes = 0
