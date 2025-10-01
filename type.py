@@ -56,7 +56,7 @@ def generate_words():
   Uses: Used in main_game_loop to create the taget words to type
   '''
   words = [fake.word() for _ in range(100)]
-  words = ' '.join([random.choice(words) for i in range(5)])
+  words = ' '.join([random.choice(words) for i in range(50)])
   return words
 
 def main_game_loop():
