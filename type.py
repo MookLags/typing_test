@@ -16,8 +16,10 @@ VERSION = '0.1'
 ### IMPORTS ###
 
 try:
+  import math
   import termios
   import tty
+  import os
   import sys
   import random
   import faker
@@ -30,6 +32,9 @@ fake = faker.Faker()
 
 # Init colorama to handle clean background colors for incorrectly typed chars
 init(autoreset=True) 
+
+# Get terminal width
+terminal_width = os.get_terminal_size().columns
 
 ### Functions ###
 def terminate():
@@ -67,12 +72,12 @@ def main_game_loop():
   '''
   running = True
   while running:
-
     random_sentence = generate_words()
+    lines_spanned = math.ceil(len(random_sentence) / terminal_width)
     sentence_length = len(random_sentence)
     key_strokes = 0
-    print(random_sentence)
-
+    print(random_sentence, flush=True, end='')
+    print(f"\x1b[{lines_spanned - 1}A\r", end='')
     while key_strokes != sentence_length:
       char_input = get_input()
 
