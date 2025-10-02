@@ -82,15 +82,17 @@ def main_game_loop():
       char_input = get_input()
 
       if char_input == '\x7f': # Checks if key pressed is backspace
-        print('\b \b', end='', flush=True) # and handles accordingly
+        replacement_char = random_sentence[key_strokes - 1]
+        print(f'\b{replacement_char}\b', end='', flush=True) # and handles accordingly
         key_strokes -= 1
+        
       else: # Checking for any letter character
         if char_input == random_sentence[key_strokes]:
           print(Back.GREEN + char_input, end='', flush=True) # Green if correct
         else:
           print(Back.RED + char_input, end='', flush=True) # Red if incorrect
         key_strokes += 1
-    print('\n\ngood job!') # Placeholder until I get stats for typing test
+    print('\ngood job!') # Placeholder until I get stats for typing test
 
     play_again = input('Go again? Press any key to keep typing, or [n] to stop\n')
     if play_again == 'n':
