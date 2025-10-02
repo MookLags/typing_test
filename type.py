@@ -6,7 +6,6 @@ typing test that ran in the terminal, so I gave it a shot. I found the get_input
 post (I can't find it anymore!), everything else if of my own design. 
 
 Currently working on:
- - Generating typed chars overtop of the string of random words.
  - Adding stats for typing test (time take, wpm)
   - Bonus: Add these stats to a sqlite database and have an option to view
 '''
