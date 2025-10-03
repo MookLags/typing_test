@@ -25,6 +25,7 @@ try:
   from colorama import Fore, Back, init
 except ImportError as e:
   print(f'Failed to import module: {e}')
+  sys.exit(2)
 
 # Initialize Faker
 fake = faker.Faker()
@@ -38,7 +39,7 @@ terminal_width = os.get_terminal_size().columns
 ### Functions ###
 def terminate():
   print('Exiting game...')
-  sys.exit()
+  sys.exit(0)
 
 def get_input() -> str:
   '''
